@@ -9,10 +9,10 @@
 adduser --system --group --home /home/bitcoin bitcoin
 
 #CREATE FILES AND DIRECTORIES
-mkdir /home/bitcoin/.bitcoin
+mkdir /home/bitcoin
 
 #GET BITCOIN.CONF 
-wget -P /home/bitcoin/.bitcoin/ https://raw.githubusercontent.com/gavincotter/playground/master/bitcoin.conf
+wget -P /home/bitcoin/ https://raw.githubusercontent.com/gavincotter/playground/master/bitcoin.conf
 
 #GET BITCOIND.SERVICE
 wget -P /lib/systemd/system/ https://raw.githubusercontent.com/gavincotter/playground/master/bitcoind.service
@@ -33,4 +33,9 @@ su -c 'install -m 0755 -o root -g root -t /usr/bin bitcoin-0.16.0/bin/*'
 #SET PERMISSIONS
 chown -R bitcoin:bitcoin /home/bitcoin
 chmod -R a-rwx /home/bitcoin
-chmod -R u+rX /home/bitcoin
+chmod u+rwX /home/bitcoin
+chmod u+rX /home/bitcoin/bitcoin.conf
+
+#START BITCOIND DAEMON
+systemctl start bitcoind
+

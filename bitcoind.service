@@ -10,7 +10,7 @@ Description=bitcoind daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/bitcoind -daemon -conf=/home/bitcoin/.bitcoin/bitcoin.conf
+ExecStart=/usr/bin/bitcoind -daemon -conf=/home/bitcoin/bitcoin.conf
 ExecStop=/usr/bin/bitcoin-cli -datadir=/home/bitcoin stop
 User=bitcoin
 Type=forking
