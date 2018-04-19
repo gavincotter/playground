@@ -1,0 +1,36 @@
+#GITHUB
+#https://github.com/gavincotter
+
+#HOMEPAGE
+#https://gavincotter.github.io
+
+
+#ADD SYSTEM USER TO RUN THE BITCOIND DAEMON
+adduser --system --group --home /home/bitcoin bitcoin
+
+#CREATE FILES AND DIRECTORIES
+mkdir /home/bitcoin/.bitcoin
+
+#GET BITCOIN.CONF 
+wget -P /home/bitcoin/.bitcoin/ https://raw.githubusercontent.com/gavincotter/playground/master/bitcoin.conf
+
+#GET BITCOIND.SERVICE
+wget -P /lib/systemd/system/ https://raw.githubusercontent.com/gavincotter/playground/master/bitcoind.service
+
+
+#MAKE SYMBOLIC LINK FOR SYSTEMD
+ln -s /lib/systemd/system/bitcoind.service /etc/systemd/system/bitcoind.service
+
+#Download the bitcoin 
+wget -P /home/bitcoin https://bitcoin.org/bin/bitcoin-core-0.16.0/bitcoin-0.16.0-x86_64-linux-gnu.tar.gz
+
+#Extract files from archive and decompress to the current directory
+tar xzf /home/bitcoin/bitcoin-0.16.0-x86_64-linux-gnu.tar.gz
+
+#COPY FILES AND SET ATTRIBUTES
+su -c 'install -m 0755 -o root -g root -t /usr/bin bitcoin-0.16.0/bin/*'
+
+#SET PERMISSIONS
+chmod -R a-rwx /home/bitcoin
+chmod -R go+rX /home/bitcoin
+

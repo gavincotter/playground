@@ -1,0 +1,19 @@
+
+# It is not recommended to modify this file in-place, because it will
+# be overwritten during package upgrades. If you want to add further
+# options or overwrite existing ones then use
+# $ systemctl edit bitcoind.service
+# See "man systemd.service" for details.
+
+[Unit]
+Description=bitcoind daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/bitcoind -daemon -conf=/home/bitcoin/.bitcoin/bitcoin.conf
+ExecStop=/usr/bin/bitcoin-cli -datadir=/home/bitcoin stop
+User=bitcoin
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
