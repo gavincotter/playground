@@ -36,6 +36,3 @@ systemctl start bitcoind
 
 #ENABLE USER(S) READ ACCESS TO BITCOIN.CONF
 adduser bitcoin user
-
-
-
